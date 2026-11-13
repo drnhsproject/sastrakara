@@ -4,8 +4,8 @@ An Agent Skill that documents a software project for people who do not read
 code. It reads what the code really does, then writes it up in warm, plain
 language for business readers, as Markdown and as a Word file they can edit.
 
-The name is Sanskrit: *śāstrakāra*, the author of a treatise. See
-[The name](#the-name).
+*Sastrakara* comes from the Sanskrit *śāstrakāra*: *śāstra* (writing,
+treatise) and *kāra* (maker). It means the document maker.
 
 ## What it does
 
@@ -135,34 +135,6 @@ skills/sastrakara/
   assets/        document-skeleton.id.md, document-skeleton.en.md, reference.docx
   scripts/       md-to-docx.sh, finish-docx.py
 ```
-
-## The name
-
-*Sastrakara* is the Sanskrit word *śāstrakāra* (शास्त्रकार) written without
-diacritics. It is a compound of two parts:
-
-- *śāstra*: a teaching, a treatise, an ordered body of knowledge. It comes
-  from the root *śās*, to instruct. Indonesian keeps the word as *sastra*,
-  where it means literature.
-- *kāra*: maker, the one who does. It comes from the root *kṛ*, to make.
-
-Sanskrit dictionaries give *śāstrakāra* as "the author of a śāstra", and by
-extension an author in general.
-
-The skill takes three things from the word:
-
-- **A śāstra exists to instruct.** It is written so that someone else can
-  understand and act, not to show what the writer knows. The reader here is a
-  person who does not read code.
-- **A śāstra puts knowledge in order.** The knowledge is already there, in the
-  code. The work is to arrange it so it can be followed: one skeleton, terms
-  explained once, the important thing first.
-- **The author answers for what is written.** A treatise is trusted because it
-  can be checked against its sources. Every statement in a document traces to
-  a file, and what cannot be traced is marked, not guessed.
-
-One letter matters: *śastrakāra*, with a short *a*, is a different word that
-means a weapon-maker. This one has the long *ā*.
 
 ## What has and has not been tested
 
