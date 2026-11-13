@@ -159,9 +159,9 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
 
 Not tested:
 - The `/sastrakara` command and automatic triggering from the description.
-- The generated DOCX opened in Microsoft Word, Google Docs or LibreOffice. It
-  was read back without errors by pandoc and by macOS `textutil`, and seen in
-  a Quick Look preview, which does not show page breaks or table borders.
+- The generated DOCX in Microsoft Word, Google Docs or LibreOffice. It was
+  opened and looked over in WPS Office on macOS, and read back without errors
+  by pandoc and by macOS `textutil`.
 - Linux and Windows.
 - Languages other than Indonesian and English.
 - Other pandoc versions. The converter edits the XML pandoc writes, so a very
