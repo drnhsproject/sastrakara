@@ -4,8 +4,8 @@ An Agent Skill that documents a software project for people who do not read
 code. It reads what the code really does, then writes it up in warm, plain
 language for business readers, as Markdown and as a Word file they can edit.
 
-*Sastrakara* joins two Indonesian words of Sanskrit origin: *sastra* (writing)
-and *kara* (maker). A maker of writing.
+The name is Sanskrit: *śāstrakāra*, the author of a treatise. See
+[The name](#the-name).
 
 ## What it does
 
@@ -136,6 +136,34 @@ skills/sastrakara/
   scripts/       md-to-docx.sh, finish-docx.py
 ```
 
+## The name
+
+*Sastrakara* is the Sanskrit word *śāstrakāra* (शास्त्रकार) written without
+diacritics. It is a compound of two parts:
+
+- *śāstra*: a teaching, a treatise, an ordered body of knowledge. It comes
+  from the root *śās*, to instruct. Indonesian keeps the word as *sastra*,
+  where it means literature.
+- *kāra*: maker, the one who does. It comes from the root *kṛ*, to make.
+
+Sanskrit dictionaries give *śāstrakāra* as "the author of a śāstra", and by
+extension an author in general.
+
+The skill takes three things from the word:
+
+- **A śāstra exists to instruct.** It is written so that someone else can
+  understand and act, not to show what the writer knows. The reader here is a
+  person who does not read code.
+- **A śāstra puts knowledge in order.** The knowledge is already there, in the
+  code. The work is to arrange it so it can be followed: one skeleton, terms
+  explained once, the important thing first.
+- **The author answers for what is written.** A treatise is trusted because it
+  can be checked against its sources. Every statement in a document traces to
+  a file, and what cannot be traced is marked, not guessed.
+
+One letter matters: *śastrakāra*, with a short *a*, is a different word that
+means a weapon-maker. This one has the long *ā*.
+
 ## What has and has not been tested
 
 Tested, on macOS with pandoc 3.11 and Python 3.13:
@@ -145,22 +173,23 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
   with no title (exit 1), `cover: false`, an embedded image, and the template
   search outside a git repository. Output XML parsed as well-formed in every
   case.
-- One full run by a fresh agent that followed only the skill, on a real web
-  project, read-only, in Indonesian: one feature document, Markdown and DOCX,
-  four "to be confirmed" items, no em dash. The 22 unclear points it reported
-  were used to tighten the instructions; that revised text has not been re-run.
+- Three full runs by fresh agents that followed only the skill, each
+  read-only on the project, each producing Markdown, DOCX and the index:
+  two Indonesian feature documents on a web project, and one English
+  document on a repository with no screens (two command-line scripts). In the
+  last two runs the reader check removed 7 unsupported claims and added none;
+  the documents carry 6 and 2 "to be confirmed" items. The unclear points the
+  agents reported were used to tighten the instructions; the final wording
+  has not been re-run.
 - Installing from GitHub with `npx skills add drnhsproject/sastrakara --skill
   sastrakara -a claude-code`: `--list` finds the skill, 8 files are copied,
   identical to this repository, and the installed converter runs.
 
 Not tested:
 - The `/sastrakara` command and automatic triggering from the description.
-- The reader check in its current wording: the full run above used an earlier
-  draft of that step.
-- English documents written by an agent (only the converter was run on them).
-- The generated DOCX opened in Microsoft Word, Google Docs or LibreOffice. The
-  layout was only seen through a macOS Quick Look preview, which does not show
-  page breaks or table borders.
+- The generated DOCX opened in Microsoft Word, Google Docs or LibreOffice. It
+  was read back without errors by pandoc and by macOS `textutil`, and seen in
+  a Quick Look preview, which does not show page breaks or table borders.
 - Linux and Windows.
 - Languages other than Indonesian and English.
 - Other pandoc versions. The converter edits the XML pandoc writes, so a very
