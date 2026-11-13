@@ -149,13 +149,14 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
   project, read-only, in Indonesian: one feature document, Markdown and DOCX,
   four "to be confirmed" items, no em dash. The 22 unclear points it reported
   were used to tighten the instructions; that revised text has not been re-run.
-- Installing from a local copy with `npx skills add <path> --skill sastrakara
-  -a claude-code`: 8 files, identical to this repository, and the installed
-  converter runs.
+- Installing from GitHub with `npx skills add drnhsproject/sastrakara --skill
+  sastrakara -a claude-code`: `--list` finds the skill, 8 files are copied,
+  identical to this repository, and the installed converter runs.
 
 Not tested:
-- Installing from GitHub, the `/sastrakara` command and automatic triggering
-  from the description.
+- The `/sastrakara` command and automatic triggering from the description.
+- The reader check in its current wording: the full run above used an earlier
+  draft of that step.
 - English documents written by an agent (only the converter was run on them).
 - The generated DOCX opened in Microsoft Word, Google Docs or LibreOffice. The
   layout was only seen through a macOS Quick Look preview, which does not show
