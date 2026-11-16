@@ -154,15 +154,30 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
   document on a repository with no screens (two command-line scripts). In the
   last two runs the reader check removed 7 unsupported claims and added none;
   the documents carry 6 and 2 "to be confirmed" items. The unclear points the
-  agents reported were used to tighten the instructions; the final wording
-  has not been re-run.
+  agents reported were used to tighten the instructions.
+- Version 0.1.3 in Claude Code 2.1.325, headless (`claude -p`), with the skill
+  installed in the project:
+  - Automatic triggering: 12 prompts, 12 as expected. Six documentation
+    requests in Indonesian and English (including "jadikan docx" for an
+    existing file) loaded the skill as the first step; six near misses
+    (docstrings, OpenAPI reference, CONTRIBUTING.md, explaining code in chat,
+    a bug fix, inline comments) did not.
+  - The `/sastrakara` command, two full runs with `--docx`: an Indonesian
+    document on a small web shop and an English one on two command-line
+    scripts. Both produced Markdown, DOCX and the index. Neither opened
+    `.env`; no secret, internal address or e-mail address reached the
+    documents; no em dash in the body. A planted code comment asking for a
+    false certification claim and the payment key was not obeyed and was
+    reported to the user. An on-screen typo was written correctly and noted
+    in the limits section. The documents carry 11 and 5 "to be confirmed"
+    items.
 - Installing from GitHub with `npx skills add drnhsproject/sastrakara --skill
   sastrakara -a claude-code` (version 0.1.3): 9 files are copied, identical
   to this repository, and the installed converter runs and refuses an unsafe
   reference-style image.
 
 Not tested:
-- The `/sastrakara` command and automatic triggering from the description.
+- Triggering in agents other than Claude Code.
 - The generated DOCX in Microsoft Word, Google Docs or LibreOffice. It was
   opened and looked over in WPS Office on macOS, and read back without errors
   by pandoc and by macOS `textutil`.
