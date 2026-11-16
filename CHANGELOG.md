@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- SKILL.md description: trigger phrases are English only; the skill still writes in
+  Indonesian or English. Trigger behaviour not re-measured.
+
 ## 0.1.3
 
 - Converter: the image guard now reads pandoc's own parse of the document

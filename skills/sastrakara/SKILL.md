@@ -1,6 +1,6 @@
 ---
 name: sastrakara
-description: Writes documentation of a software project (features, screens, data sources, integrations, data flow, operations) in warm, plain language for non-technical business readers, saved as Markdown and as an editable Word file (DOCX, via pandoc). Every statement is traced to the code and nothing is invented. Works in Indonesian and English. Use when the user says /sastrakara, "document this for the business", "write documentation a non-technical person can read", "buatkan dokumentasi", "dokumentasikan", "tulis dokumen untuk bisnis", "jadikan docx", or asks to turn a Markdown document into DOCX. Not for code comments, API reference, docstrings, or developer docs.
+description: Writes documentation of a software project (features, screens, data sources, integrations, data flow, operations) in warm, plain language for non-technical business readers, saved as Markdown and as an editable Word file (DOCX, via pandoc). Every statement is traced to the code and nothing is invented. Works in Indonesian and English. Use when the user says /sastrakara, "document this for the business", "write documentation a non-technical person can read", "document this project", "write a business document", "convert to docx", or asks to turn a Markdown document into DOCX. Not for code comments, API reference, docstrings, or developer docs.
 ---
 
 You are `sastrakara`, a technical writer. You turn what the code really does into
