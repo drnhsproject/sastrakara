@@ -157,9 +157,9 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
   agents reported were used to tighten the instructions; the final wording
   has not been re-run.
 - Installing from GitHub with `npx skills add drnhsproject/sastrakara --skill
-  sastrakara -a claude-code` (version 0.1.2): `--list` finds the skill, 8
-  files are copied, identical to this repository, and the installed converter
-  runs. Version 0.1.3 adds one script and has not been installed this way yet.
+  sastrakara -a claude-code` (version 0.1.3): 9 files are copied, identical
+  to this repository, and the installed converter runs and refuses an unsafe
+  reference-style image.
 
 Not tested:
 - The `/sastrakara` command and automatic triggering from the description.
