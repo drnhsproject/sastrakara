@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.3
+
+- Converter: the image guard now reads pandoc's own parse of the document
+  (`scripts/check-images.py`). Reference-style images such as `![x][r]` with
+  `[r]: ../file.png` used to pass the old text pattern and could embed a file
+  from outside the document folder. Symlinked folders on the way to an image
+  are refused as well.
+- SKILL.md: the style template section is shorter; the details stay in the
+  Step 0 table and the README.
+
 ## 0.1.2
 
 README only: the meaning of the name is now one line (*śāstrakāra*, the

@@ -119,7 +119,8 @@ status: "Draft"
 reviewer: ""
 ```
 
-Empty fields are left out. `cover: false` keeps a plain title block. Cover
+Empty fields are left out. `cover: false` keeps a plain title block. Write each
+field on one line: the cover reads simple `key: value` lines, not multi-line YAML. Cover
 labels are in Indonesian or English according to `lang`; other languages get
 English labels.
 
@@ -133,7 +134,7 @@ skills/sastrakara/
   SKILL.md       flow, accuracy guard, reader check
   references/    voice-id.md, voice-en.md: phrasing, fixed strings, check examples
   assets/        document-skeleton.id.md, document-skeleton.en.md, reference.docx
-  scripts/       md-to-docx.sh, finish-docx.py
+  scripts/       md-to-docx.sh, check-images.py, finish-docx.py
 ```
 
 ## What has and has not been tested
@@ -141,7 +142,9 @@ skills/sastrakara/
 Tested, on macOS with pandoc 3.11 and Python 3.13:
 - The converter: standard template, a project template found in a parent
   folder, Indonesian and English documents, refusal to overwrite (exit 2),
-  `--force`, rejection of unsafe and remote image paths (exit 3), a document
+  `--force`, rejection of unsafe and remote image paths in every Markdown
+  image form, including reference-style images and percent-encoded paths
+  (exit 3, 14 cases), a document
   with no title (exit 1), `cover: false`, an embedded image, and the template
   search outside a git repository. Output XML parsed as well-formed in every
   case.
@@ -154,8 +157,9 @@ Tested, on macOS with pandoc 3.11 and Python 3.13:
   agents reported were used to tighten the instructions; the final wording
   has not been re-run.
 - Installing from GitHub with `npx skills add drnhsproject/sastrakara --skill
-  sastrakara -a claude-code`: `--list` finds the skill, 8 files are copied,
-  identical to this repository, and the installed converter runs.
+  sastrakara -a claude-code` (version 0.1.2): `--list` finds the skill, 8
+  files are copied, identical to this repository, and the installed converter
+  runs. Version 0.1.3 adds one script and has not been installed this way yet.
 
 Not tested:
 - The `/sastrakara` command and automatic triggering from the description.

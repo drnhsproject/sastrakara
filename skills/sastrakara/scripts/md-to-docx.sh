@@ -104,23 +104,14 @@ if [ -e "$TARGET_DOCX" ] && [ -z "$FORCE_OVERWRITE" ]; then
   exit 2
 fi
 
+PANDOC_READER="markdown-raw_attribute-raw_html"
+
 # pandoc's --sandbox blocks all image embedding, so an explicit guard replaces it:
 # every image target must be a relative png/jpg/jpeg inside the document's own folder
-# (no URL, no absolute path, no "..", no symlink). Anything else aborts the conversion.
-IMAGE_TARGETS="$(grep -oE '!\[[^]]*\]\([^)[:space:]]+' "$SOURCE_MARKDOWN" | sed -E 's/^!\[[^]]*\]\(//' || true)"
-while IFS= read -r IMAGE_TARGET; do
-  [ -z "$IMAGE_TARGET" ] && continue
-  case "$IMAGE_TARGET" in
-    /*|*..*|*://*|*:*|~*) echo "✗ Unsafe image path: $IMAGE_TARGET" >&2; exit 3 ;;
-  esac
-  case "$IMAGE_TARGET" in
-    *.png|*.jpg|*.jpeg) ;;
-    *) echo "✗ Image must be png/jpg: $IMAGE_TARGET" >&2; exit 3 ;;
-  esac
-  if [ -L "$SOURCE_DIRECTORY/$IMAGE_TARGET" ] || [ ! -f "$SOURCE_DIRECTORY/$IMAGE_TARGET" ]; then
-    echo "✗ Image missing or a symlink: $IMAGE_TARGET" >&2; exit 3
-  fi
-done <<< "$IMAGE_TARGETS"
+# (no URL, no absolute path, no "..", no symlink). The guard reads pandoc's own parse
+# of the document, so reference-style images are checked too. Anything else aborts.
+PANDOC_JSON="$(pandoc --from "$PANDOC_READER" --to json -- "$SOURCE_MARKDOWN")"
+printf '%s' "$PANDOC_JSON" | python3 -I "$SCRIPT_DIRECTORY/check-images.py" "$SOURCE_DIRECTORY"
 
 # Heading of the table of contents: the document's own toc-title wins, otherwise it
 # follows the document language.
@@ -137,7 +128,7 @@ PANDOC_TEMP="$(mktemp "${TMPDIR:-/tmp}/sastrakara-XXXXXX.docx")"
 trap 'rm -f "$PANDOC_TEMP"' EXIT
 
 pandoc \
-  --from markdown-raw_attribute-raw_html \
+  --from "$PANDOC_READER" \
   --to docx \
   --reference-doc="$REFERENCE_DOCX" \
   --resource-path="$SOURCE_DIRECTORY" \

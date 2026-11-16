@@ -204,13 +204,10 @@ Rules for the check itself:
 
 ## Style template
 
-With no template in the project, the standard one shipped in `assets/reference.docx` is
-used. To use the organisation's own look, the user saves a Word file with their styles as
-`<docs>/_template/reference.docx`; pandoc takes styles, header, footer and page setup from
-it, not its page content. The cover (title, subtitle, organisation, recipient, version
-table) is built from front matter: `organization`, `prepared_for`, `version`, `status`,
-`reviewer`; `cover: false` turns it off. After a template change, regenerate only documents
-that were never edited by hand.
+The look comes from the style template in the Step 0 table: styles, header, footer and
+page setup, not its page content. The cover is built from front matter (`organization`,
+`prepared_for`, `version`, `status`, `reviewer`, one line each); `cover: false` turns it
+off. After a template change, regenerate only documents that were never edited by hand.
 
 ## Document set
 
