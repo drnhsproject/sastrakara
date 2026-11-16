@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+README only: the meaning of the name is now one line (*śāstrakāra*, the
+document maker), and the test notes record the DOCX check in WPS Office. The
+skill itself is unchanged from 0.1.1.
+
 ## 0.1.1
 
 - README: the meaning of the name (Sanskrit *śāstrakāra*).
