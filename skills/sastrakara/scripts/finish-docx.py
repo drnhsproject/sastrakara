@@ -17,6 +17,7 @@ from the reference template pandoc was given. Standard library only.
 Front-matter keys read here: title, subtitle, author, date, lang, organization,
 prepared_for, version, status, reviewer, cover.
 """
+import os
 import re
 import sys
 import zipfile
@@ -46,6 +47,7 @@ ALIASES = {"organisation": "organization"}
 
 
 def read_front_matter(path):
+    # deepcode ignore PT: local CLI; path is user-supplied by design and validated in main()
     with open(path, encoding="utf8") as handle:
         text = handle.read().replace("\r\n", "\n")
     match = re.match(r"---\n(.*?)\n---\n", text, re.S)
@@ -197,13 +199,22 @@ def build_table_of_contents(document):
 def main():
     if len(sys.argv) != 4:
         sys.exit("✗ Usage: finish-docx.py <pandoc.docx> <source.md> <output.docx>")
-    pandoc_path, source_path, output_path = sys.argv[1:4]
+    pandoc_path, source_path, output_path = (
+        os.path.realpath(arg) for arg in sys.argv[1:4]
+    )
+    if not (os.path.isfile(pandoc_path) and pandoc_path.lower().endswith(".docx")):
+        sys.exit(f"✗ not a .docx file: {pandoc_path}")
+    if not (os.path.isfile(source_path) and source_path.lower().endswith(".md")):
+        sys.exit(f"✗ not a .md file: {source_path}")
+    if not output_path.lower().endswith(".docx"):
+        sys.exit(f"✗ output must end in .docx: {output_path}")
     meta = read_front_matter(source_path)
     if not meta.get("title"):
         sys.exit("✗ front matter has no title")
     language = meta.get("lang", "en").lower()[:2]
     labels = LABELS.get(language, LABELS["en"])
 
+    # deepcode ignore PT: local CLI; path is user-supplied by design and validated in main()
     with zipfile.ZipFile(pandoc_path) as source:
         parts = {name: source.read(name) for name in source.namelist()}
 
