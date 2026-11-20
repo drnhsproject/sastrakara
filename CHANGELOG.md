@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Three new scripts take the mechanical work off the model, so a small or cheap model
+  gets it right every time: `scripts/settle-facts.py` (Step 0: output folder, language,
+  template, commit), `scripts/lint-doc.py` (placeholders, em dashes, code and paths in the
+  body, secret shapes, emoji headings, appendix opener, filler words, long sentences) and
+  `scripts/update-index.py` (the index row). SKILL.md now calls them. Tested on a sample
+  document; not yet measured with a small model.
+- `finish-docx.py`: checks the three arguments (existing .docx, existing .md, output .docx)
+  before opening them.
 - SKILL.md description: trigger phrases are English only; the skill still writes in
   Indonesian or English. Trigger behaviour not re-measured.
 

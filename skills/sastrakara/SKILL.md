@@ -29,6 +29,12 @@ No topic: ask what to document and offer the document set as options.
 
 Do this once per session, quietly, before anything else.
 
+Run `python3 -I scripts/settle-facts.py [--out <folder>] [--lang <code>]` from the project
+root. It prints `docs`, `lang`, `skeleton`, `template`, `voice`, `commit` and `dirty`, which
+settle items 2 to 4 below and the table after them. Use its values as printed. Two
+answers need you: `docs: ASK` (several indexes found, ask which) and `lang: UNKNOWN`
+(use the language the user writes in). Items 2 and 3 describe the rules the script follows.
+
 1. **Project rules.** Read the project's agent instructions (`AGENTS.md`, `CLAUDE.md` or
    similar) and its `README`. Project rules outrank this skill's defaults.
 2. **Output folder** `<docs>`, first match wins: `--out` · the folder that holds an existing
@@ -112,6 +118,13 @@ thing in every row.
 
 ## Step 3b: Reader check
 
+First run `python3 -I scripts/lint-doc.py <file.md>` (add `--external` for an external
+audience). It finds, for certain: placeholders left in the front matter, em dashes, code
+blocks and file paths in the body, emoji in headings, secret shapes, a missing appendix
+opener or fixed section, filler words, long sentences and paragraphs. Fix every `ERROR`
+and run it again until it prints `✓`. Treat each `WARN` as a prompt to look, not an order.
+The script cannot judge the four questions below: that part stays with you.
+
 Run this on the body written for business readers before saving. The technical appendix,
 the front matter and quoted on-screen text are exempt. The check asks four questions, from
 the smallest unit to the largest. The voice reference shows what each one catches in the
@@ -138,7 +151,7 @@ ordinary writing.
 Rules for the check itself:
 
 - **No em dash (`—`) in the body.** Use a period, comma, colon or parentheses. Hyphens and
-  en dashes in number ranges (2020–2024) are fine. Check: `grep -n '—' <file.md>`; hits
+  en dashes in number ranges (2020–2024) are fine. `lint-doc.py` reports it; hits
   inside the appendix or quoted screen text are allowed.
 - **Leave good plain writing alone.** Standard sentences, precise formal vocabulary and
   domain terms repeated on purpose are not faults. Repeat the clearest word instead of
@@ -189,8 +202,11 @@ Rules for the check itself:
    the user may have edited it in Word. Then ask: overwrite with `--force`, save as `-v2`,
    or keep the existing file. Never pass `--force` unasked. If `pandoc` or `python3` is
    missing, leave the `.md` in place and tell the user what to install.
-4. Add or update the row in the index (columns and status words are in the voice
-   reference). The document column is a relative link; the readers column names the
+4. Add or update the row in the index with `python3 -I scripts/update-index.py <docs>
+   <file.md> --readers "<readers>" --status draft|docx|manual`. It writes the row in the
+   document language, creates `<docs>/README.md` or appends the marked section when needed,
+   and refuses (exit 2) to change a row marked as edited by hand. The rules it follows
+   (columns and status words are in the voice reference): The document column is a relative link; the readers column names the
    readers given in the document; the format column is `MD` or
    `MD, DOCX`. Status is the draft word after a Markdown-only run, `DOCX` after a
    conversion, and the edited-by-hand word once the user says they changed the DOCX. Create `<docs>/README.md` if it is missing. If it exists without the
@@ -231,5 +247,5 @@ time, confirming each:
 - Overwrite an existing `.docx` without the user's explicit choice.
 - Put code, jargon or unexplained acronyms in the main body.
 - State something the code does not confirm.
-- Save a business document before the Step 3b reader check has run.
+- Save a business document before `lint-doc.py` prints `✓` and the Step 3b reader check has run.
 - Mix languages in one document (code identifiers in the technical appendix are fine).

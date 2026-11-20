@@ -134,7 +134,8 @@ skills/sastrakara/
   SKILL.md       flow, accuracy guard, reader check
   references/    voice-id.md, voice-en.md: phrasing, fixed strings, check examples
   assets/        document-skeleton.id.md, document-skeleton.en.md, reference.docx
-  scripts/       md-to-docx.sh, check-images.py, finish-docx.py
+  scripts/       md-to-docx.sh, check-images.py, finish-docx.py,
+                 settle-facts.py, lint-doc.py, update-index.py
 ```
 
 ## What has and has not been tested
