@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.4
 
 - Three new scripts take the mechanical work off the model, so a small or cheap model
   gets it right every time: `scripts/settle-facts.py` (Step 0: output folder, language,
