@@ -67,12 +67,19 @@ def main():
         sys.exit("✗ document has no title in its front matter")
     lang = "id" if meta.get("lang", "en").lower().startswith("id") else "en"
     words = TEXT[lang]
-    link = os.path.relpath(os.path.realpath(document), os.path.realpath(docs)).replace(os.sep, "/")
+    if not document.lower().endswith(".md"):
+        sys.exit(f"✗ not a Markdown document: {document}")
+    docs = os.path.realpath(docs)
+    link = os.path.relpath(os.path.realpath(document), docs).replace(os.sep, "/")
+    if link.startswith(".."):
+        sys.exit(f"✗ the document is outside the docs folder: {document}")
     fmt = "MD" if status == "draft" else "MD, DOCX"
     row = "| " + " | ".join([f"[{cell(meta['title'])}]({link})", cell(readers),
                              cell(meta.get("date", "")), fmt, words["status"][status]]) + " |"
 
     readme = os.path.join(docs, "README.md")
+    if os.path.islink(readme) or os.path.isdir(readme):
+        sys.exit(f"✗ {readme} is a symlink or directory; refusing to write through it.")
     os.makedirs(docs, exist_ok=True)
     text = open(readme, encoding="utf8").read() if os.path.isfile(readme) else ""
     table = ["| " + " | ".join(words["head"]) + " |", "|---|---|---|---|---|"]

@@ -47,7 +47,6 @@ ALIASES = {"organisation": "organization"}
 
 
 def read_front_matter(path):
-    # deepcode ignore PT: local CLI; path is user-supplied by design and validated in main()
     with open(path, encoding="utf8") as handle:
         text = handle.read().replace("\r\n", "\n")
     match = re.match(r"---\n(.*?)\n---\n", text, re.S)
@@ -214,7 +213,6 @@ def main():
     language = meta.get("lang", "en").lower()[:2]
     labels = LABELS.get(language, LABELS["en"])
 
-    # deepcode ignore PT: local CLI; path is user-supplied by design and validated in main()
     with zipfile.ZipFile(pandoc_path) as source:
         parts = {name: source.read(name) for name in source.namelist()}
 

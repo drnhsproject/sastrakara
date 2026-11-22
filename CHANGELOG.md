@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5
+
+- `update-index.py`: refuses a document that is not Markdown or lies outside the docs
+  folder, and refuses to write through a symlinked or directory `README.md`.
+- `finish-docx.py`: removed two `deepcode ignore` comments that Snyk Code does not read.
+
 ## 0.1.4
 
 - Three new scripts take the mechanical work off the model, so a small or cheap model
