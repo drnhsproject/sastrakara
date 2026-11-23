@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- New "Reply style" block in `SKILL.md`: the reply leads with the answer, with no greeting, announcement or recap; complete short sentences; negations, numbers and units are never shortened; warnings and questions to the user keep full wording. Text saved to files still follows the skill's own file rules.
+
 ## 0.1.5
 
 - `update-index.py`: refuses a document that is not Markdown or lies outside the docs
